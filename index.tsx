@@ -1,76 +1,52 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { PhoneCall, Search, Star, ShoppingCart, CheckCircle2 } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
-import { motion } from "framer-motion";
+// pages/index.tsx
 
-const items = [
-  {
-    name: "Guarda-Roupa 6 Portas",
-    description: "Design moderno com amplo espaço interno.",
-    image: "/guarda-roupa.jpg",
-    category: "Quarto",
-  },
-  {
-    name: "Cômoda 5 Gavetas",
-    description: "Compacta e ideal para qualquer ambiente.",
-    image: "/comoda.jpg",
-    category: "Quarto",
-  },
-  {
-    name: "Armário de Cozinha",
-    description: "Ótima organização com prateleiras reforçadas.",
-    image: "/armario.jpg",
-    category: "Cozinha",
-  },
-  {
-    name: "Mesa de Jantar 6 Lugares",
-    description: "Tampo de vidro e acabamento premium.",
-    image: "/mesa.jpg",
-    category: "Sala de Jantar",
-  },
-  {
-    name: "Painel para TV 65”",
-    description: "Design elegante e espaço para decoração.",
-    image: "/painel.jpg",
-    category: "Sala de Estar",
-  },
-  {
-    name: "Cama Box Casal",
-    description: "Conforto e durabilidade com ótimo custo-benefício.",
-    image: "/cama.jpg",
-    category: "Quarto",
-  },
-];
+import Head from "next/head"; import Image from "next/image"; import { useState } from "react";
 
-export default function Home() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-black p-4 text-white">
-      <h1 className="text-3xl font-bold text-center mb-8">Catálogo de Móveis</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {items.map((item, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.05 }}
-            className="bg-white text-black rounded-xl shadow-lg overflow-hidden"
+export default function Home() { const produtos = [ { nome: "Guarda-Roupa 6 Portas", descricao: "Moderno, espaçoso e com espelho", imagem: "/guarda-roupa.jpg", }, { nome: "Cômoda 5 Gavetas", descricao: "Ideal para organização do quarto", imagem: "/comoda.jpg", }, { nome: "Painel para TV 55"", descricao: "Estilo e praticidade na sua sala", imagem: "/painel.jpg", }, { nome: "Mesa de Jantar 4 Lugares", descricao: "Compacta e elegante", imagem: "/mesa.jpg", }, { nome: "Armário de Cozinha", descricao: "Completo com várias portas", imagem: "/armario.jpg", }, { nome: "Cama Box Casal", descricao: "Conforto e estilo", imagem: "/cama.jpg", }, ];
+
+const numeroWhatsApp = "5535999462924";
+
+const mensagem = (produto: string) => https://wa.me/${numeroWhatsApp}?text=Ol%C3%A1,%20tenho%20interesse%20no%20produto%20${encodeURIComponent( produto )};
+
+return ( <div className="bg-sky-100 min-h-screen text-black"> <Head> <title>Loja Bom Preço</title> </Head>
+
+<header className="bg-black text-white p-4 text-center text-2xl font-bold">
+    Loja Bom Preço
+  </header>
+
+  <main className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {produtos.map((item, index) => (
+      <div
+        key={index}
+        className="bg-white rounded-2xl shadow-md overflow-hidden"
+      >
+        <Image
+          src={item.imagem}
+          alt={item.nome}
+          width={500}
+          height={300}
+          className="w-full object-cover"
+        />
+        <div className="p-4">
+          <h2 className="text-xl font-semibold mb-2">{item.nome}</h2>
+          <p className="mb-4 text-sm text-gray-600">{item.descricao}</p>
+          <a
+            href={mensagem(item.nome)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
           >
-            <Image src={item.image} alt={item.name} width={500} height={300} />
-            <div className="p-4">
-              <h2 className="font-bold text-xl">{item.name}</h2>
-              <p className="text-sm">{item.description}</p>
-              <Button className="mt-4 w-full bg-green-600 hover:bg-green-700">
-                <a
-                  href={`https://wa.me/5535999462924?text=Olá! Gostaria de comprar: ${item.name}`}
-                  target="_blank"
-                >
-                  Comprar via WhatsApp
-                </a>
-              </Button>
-            </div>
-          </motion.div>
-        ))}
+            Comprar pelo WhatsApp
+          </a>
+        </div>
       </div>
-    </div>
-  );
-}
+    ))}
+  </main>
+
+  <footer className="text-center text-sm p-4 text-gray-600">
+    © {new Date().getFullYear()} Loja Bom Preço. Todos os direitos reservados.
+  </footer>
+</div>
+
+); }
+
